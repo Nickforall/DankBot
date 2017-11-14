@@ -1,15 +1,22 @@
+// load ze config
+require('dotenv').config();
+
+// load libraries
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const commands = require("./lib/commands")(client);
 
+// globals
 global.COMMAND_PREFIX = "db!";
 global.DICKBUDDS_VOICE_ID = "311201456655040515"
 
+// ready handler
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     client.user.setGame('Dickbudds');
 });
 
+// message handler
 client.on('message', message => {
     if(message.content.startsWith(COMMAND_PREFIX)) {
         var argArray = message.content.split(" ");
@@ -21,4 +28,5 @@ client.on('message', message => {
     }
 });
 
-client.login('');
+// logs in
+client.login(process.env.DISCORD_TOKEN);
